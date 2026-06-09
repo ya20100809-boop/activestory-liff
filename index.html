@@ -9,140 +9,42 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
-      background: #f0f4f9;
-      color: #333;
-      min-height: 100vh;
+      background: #f0f4f9; color: #333; min-height: 100vh;
     }
-    .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 24px 16px 48px;
-    }
-    .logo {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .logo h1 {
-      font-size: 22px;
-      color: #1a3a6b;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-    }
-    .logo p {
-      font-size: 13px;
-      color: #666;
-      margin-top: 6px;
-      line-height: 1.6;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      margin-bottom: 16px;
-    }
-    .section-title {
-      font-size: 14px;
-      font-weight: bold;
-      color: #1a3a6b;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
+    .container { max-width: 480px; margin: 0 auto; padding: 24px 16px 48px; }
+    .logo { text-align: center; margin-bottom: 24px; }
+    .logo h1 { font-size: 22px; color: #1a3a6b; font-weight: bold; letter-spacing: 0.05em; }
+    .logo p { font-size: 13px; color: #666; margin-top: 6px; line-height: 1.6; }
+    .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 16px; }
+    .section-title { font-size: 14px; font-weight: bold; color: #1a3a6b; margin-bottom: 14px; line-height: 1.5; }
     .form-group { margin-bottom: 4px; }
-    label.field-label {
-      display: block;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+    label.field-label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 8px; }
     .required { color: #e74c3c; margin-left: 4px; }
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
+    input[type="text"] { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
     input[type="text"]:focus { border-color: #1a3a6b; }
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .radio-item {
-      display: flex;
-      align-items: center;
-      padding: 12px 14px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .radio-item:has(input:checked) {
-      border-color: #1a3a6b;
-      background: #eef2f9;
-    }
-    .radio-item input[type="radio"] {
-      width: 18px;
-      height: 18px;
-      margin-right: 10px;
-      accent-color: #1a3a6b;
-      flex-shrink: 0;
-    }
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-item { display: flex; align-items: center; padding: 12px 14px; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+    .radio-item:has(input:checked) { border-color: #1a3a6b; background: #eef2f9; }
+    .radio-item input[type="radio"] { width: 18px; height: 18px; margin-right: 10px; accent-color: #1a3a6b; flex-shrink: 0; }
     .radio-item span { font-size: 14px; line-height: 1.4; }
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      background: #1a3a6b;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
+    .submit-btn { width: 100%; padding: 16px; background: #1a3a6b; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: opacity 0.2s; }
     .submit-btn:active { opacity: 0.75; }
     .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
-    #loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #666;
-      font-size: 14px;
-    }
-    #success-container {
-      display: none;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-    }
-    .success-card {
-      background: white;
-      border-radius: 16px;
-      padding: 40px 24px;
-      text-align: center;
-      margin: 24px 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
+    #loading { display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #666; font-size: 14px; }
+    #success-container { display: none; min-height: 100vh; justify-content: center; align-items: center; }
+    .success-card { background: white; border-radius: 16px; padding: 40px 24px; text-align: center; margin: 24px 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
     .success-card .icon { font-size: 52px; margin-bottom: 16px; }
     .success-card h2 { font-size: 20px; color: #1a3a6b; margin-bottom: 12px; }
     .success-card p { font-size: 14px; color: #666; line-height: 1.8; }
   </style>
 </head>
 <body>
-
   <div id="loading">読み込み中...</div>
-
   <div id="form-container" class="container" style="display:none;">
     <div class="logo">
       <h1>Active STORY</h1>
       <p>あなたに合った情報をお届けするために<br>2つだけ教えてください</p>
     </div>
-
     <form id="survey-form">
       <div class="card">
         <div class="form-group">
@@ -150,55 +52,27 @@
           <input type="text" id="name" placeholder="例：山田 太郎" required>
         </div>
       </div>
-
       <div class="card">
         <p class="section-title">Q1. 今のあなたに一番近いのは？<span class="required">*</span></p>
         <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="q1" value="A" required>
-            <span>会社員・教員など。このままでいいか迷っている</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q1" value="B">
-            <span>独立・起業を考えている</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q1" value="C">
-            <span>すでに経営者・フリーランス</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q1" value="D">
-            <span>コーチングや自己成長に興味があって来た</span>
-          </label>
+          <label class="radio-item"><input type="radio" name="q1" value="A" required><span>会社員・教員など。このままでいいか迷っている</span></label>
+          <label class="radio-item"><input type="radio" name="q1" value="B"><span>独立・起業を考えている</span></label>
+          <label class="radio-item"><input type="radio" name="q1" value="C"><span>すでに経営者・フリーランス</span></label>
+          <label class="radio-item"><input type="radio" name="q1" value="D"><span>コーチングや自己成長に興味があって来た</span></label>
         </div>
       </div>
-
       <div class="card">
         <p class="section-title">Q2. 今一番「なんとかしたい」ことは？<span class="required">*</span></p>
         <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="q2" value="1" required>
-            <span>仕事・キャリアのこと</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q2" value="2">
-            <span>自分の可能性や将来のこと</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q2" value="3">
-            <span>人との関係・チームのこと</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="q2" value="4">
-            <span>まずコーチングがどんなものか知りたい</span>
-          </label>
+          <label class="radio-item"><input type="radio" name="q2" value="1" required><span>仕事・キャリアのこと</span></label>
+          <label class="radio-item"><input type="radio" name="q2" value="2"><span>自分の可能性や将来のこと</span></label>
+          <label class="radio-item"><input type="radio" name="q2" value="3"><span>人との関係・チームのこと</span></label>
+          <label class="radio-item"><input type="radio" name="q2" value="4"><span>まずコーチングがどんなものか知りたい</span></label>
         </div>
       </div>
-
       <button type="submit" class="submit-btn" id="submit-btn">送信する</button>
     </form>
   </div>
-
   <div id="success-container">
     <div class="success-card">
       <div class="icon">✅</div>
@@ -206,80 +80,41 @@
       <p>回答を受け付けました。<br>あなたに合った情報をお届けしますね。<br><br>このページは閉じてOKです。</p>
     </div>
   </div>
-
   <script>
-    // ▼ 設定項目（デプロイ後に書き換える）
-    const LIFF_ID  = '2010341329-ZOQ2pI15'; // LINE DevelopersのLIFF ID
-    const GAS_URL  = 'https://script.google.com/macros/s/AKfycbxfITbHlx7kmOZiAUza3lJFTvTbP2yzhmClDNgY8MogbVIgSG3L5HzsK-NWtKJ6Zs90iA/exec';
-
-    let lineUserId = '';
-    let lineDisplayName = '';
-
+    const LIFF_ID = '2010341329-ZOQ2pI15';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxfITbHlx7kmOZiAUza3lJFTvTbP2yzhmClDNgY8MogbVIgSG3L5HzsK-NWtKJ6Zs90iA/exec';
+    let lineUserId = '', lineDisplayName = '';
     async function initLiff() {
       try {
         await liff.init({ liffId: LIFF_ID });
-
-        if (!liff.isLoggedIn()) {
-          liff.login();
-          return;
-        }
-
+        if (!liff.isLoggedIn()) { liff.login(); return; }
         const profile = await liff.getProfile();
-        lineUserId       = profile.userId;
-        lineDisplayName  = profile.displayName;
-
+        lineUserId = profile.userId;
+        lineDisplayName = profile.displayName;
         document.getElementById('loading').style.display = 'none';
         document.getElementById('form-container').style.display = 'block';
-
       } catch (err) {
-        document.getElementById('loading').textContent =
-          'エラーが発生しました。ページを再読み込みしてください。';
+        document.getElementById('loading').textContent = 'エラーが発生しました。ページを再読み込みしてください。';
         console.error(err);
       }
     }
-
     document.getElementById('survey-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-
       const name = document.getElementById('name').value.trim();
-      const q1   = document.querySelector('input[name="q1"]:checked')?.value;
-      const q2   = document.querySelector('input[name="q2"]:checked')?.value;
-
-      if (!name || !q1 || !q2) {
-        alert('すべての項目を入力してください。');
-        return;
-      }
-
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+      if (!name || !q1 || !q2) { alert('すべての項目を入力してください。'); return; }
       const btn = document.getElementById('submit-btn');
-      btn.disabled    = true;
-      btn.textContent = '送信中...';
-
-      const payload = {
-        lineUserId,
-        lineDisplayName,
-        name,
-        q1,
-        q2,
-        submittedAt: new Date().toISOString()
-      };
-
+      btn.disabled = true; btn.textContent = '送信中...';
       try {
-        await fetch(GAS_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        });
-
+        await fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ lineUserId, lineDisplayName, name, q1, q2, submittedAt: new Date().toISOString() }) });
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('success-container').style.display = 'flex';
-
       } catch (err) {
         alert('送信に失敗しました。もう一度お試しください。');
-        btn.disabled    = false;
-        btn.textContent = '送信する';
-        console.error(err);
+        btn.disabled = false; btn.textContent = '送信する';
       }
     });
-
     initLiff();
   </script>
 </body>
