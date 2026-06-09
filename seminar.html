@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>セミナー申込 | Active STORY</title>
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+      background: #f0f4f9;
+      color: #333;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    .header {
+      background: #1a3a6b;
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .header .label {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+      margin-bottom: 6px;
+    }
+    .header h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .header .date {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .required { color: #e74c3c; margin-left: 4px; }
+    .optional {
+      font-size: 11px;
+      color: #999;
+      font-weight: normal;
+      margin-left: 6px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    input[type="text"]:focus,
+    textarea:focus { border-color: #1a3a6b; }
+    textarea { resize: vertical; min-height: 80px; }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      padding: 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .radio-item:has(input:checked) {
+      border-color: #1a3a6b;
+      background: #eef2f9;
+    }
+    .radio-item input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
+      accent-color: #1a3a6b;
+      flex-shrink: 0;
+    }
+    .radio-item .radio-text { flex: 1; }
+    .radio-item .radio-title {
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .radio-item .radio-sub {
+      font-size: 12px;
+      color: #666;
+      margin-top: 2px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: #1a3a6b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:active { opacity: 0.75; }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+    #loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #666;
+      font-size: 14px;
+    }
+    #success-container {
+      display: none;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    .success-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 400px;
+    }
+    .success-card .icon { font-size: 52px; margin-bottom: 16px; }
+    .success-card h2 { font-size: 20px; color: #1a3a6b; margin-bottom: 12px; }
+    .success-card p { font-size: 14px; color: #666; line-height: 1.8; }
+    .notice {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">読み込み中...</div>
+
+  <div id="form-container" class="container" style="display:none;">
+    <div class="header">
+      <div class="label">Active STORY セミナー</div>
+      <h1>ゴール設定講座</h1>
+      <div class="date">📅 2026年6月24日（火）</div>
+    </div>
+
+    <form id="seminar-form">
+      <div class="card">
+        <label class="field-label">
+          お名前<span class="required">*</span>
+        </label>
+        <input type="text" id="name" placeholder="例：山田 太郎" required>
+      </div>
+
+      <div class="card">
+        <label class="field-label">
+          参加形式<span class="required">*</span>
+        </label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="format" value="オンライン" required>
+            <div class="radio-text">
+              <div class="radio-title">💻 オンライン参加</div>
+              <div class="radio-sub">Zoomで参加（URLを後日お送りします）</div>
+            </div>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="format" value="対面">
+            <div class="radio-text">
+              <div class="radio-title">🏢 対面参加</div>
+              <div class="radio-sub">岡山市内（場所は後日お知らせします）</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label">
+          一言メッセージ<span class="optional">任意</span>
+        </label>
+        <textarea id="message" placeholder="参加の動機や気になっていることなど、何でも"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        申し込む
+      </button>
+      <p class="notice">無料・勧誘なし。お気軽にどうぞ。</p>
+    </form>
+  </div>
+
+  <div id="success-container">
+    <div class="success-card">
+      <div class="icon">🎉</div>
+      <h2>お申し込みありがとうございます！</h2>
+      <p>
+        6月24日のセミナーへの<br>お申し込みを受け付けました。<br><br>
+        詳細は担当者よりLINEにてご連絡します。<br>
+        当日お会いできることを楽しみにしています！
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const LIFF_ID = 'YOUR_SEMINAR_LIFF_ID_HERE'; // 新しいLIFF IDに書き換える
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxfITbHlx7kmOZiAUza3lJFTvTbP2yzhmClDNgY8MogbVIgSG3L5HzsK-NWtKJ6Zs90iA/exec';
+
+    let lineUserId = '';
+    let lineDisplayName = '';
+
+    async function initLiff() {
+      try {
+        await liff.init({ liffId: LIFF_ID });
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+        const profile = await liff.getProfile();
+        lineUserId      = profile.userId;
+        lineDisplayName = profile.displayName;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('form-container').style.display = 'block';
+      } catch (err) {
+        document.getElementById('loading').textContent =
+          'エラーが発生しました。再読み込みしてください。';
+      }
+    }
+
+    document.getElementById('seminar-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name    = document.getElementById('name').value.trim();
+      const format  = document.querySelector('input[name="format"]:checked')?.value;
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !format) {
+        alert('お名前と参加形式を入力してください。');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled    = true;
+      btn.textContent = '送信中...';
+
+      const payload = {
+        type: 'seminar',
+        lineUserId,
+        lineDisplayName,
+        name,
+        format,
+        message,
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        await fetch(GAS_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('success-container').style.display = 'flex';
+
+      } catch (err) {
+        alert('送信に失敗しました。もう一度お試しください。');
+        btn.disabled    = false;
+        btn.textContent = '申し込む';
+      }
+    });
+
+    initLiff();
+  </script>
+</body>
+</html>
