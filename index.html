@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>セミナー申込 | Active STORY</title>
+  <title>Active STORY アンケート</title>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,29 +18,21 @@
       margin: 0 auto;
       padding: 24px 16px 48px;
     }
-    .header {
-      background: #1a3a6b;
-      color: white;
+    .logo {
       text-align: center;
-      padding: 28px 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
-    .header .label {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      opacity: 0.8;
-      margin-bottom: 6px;
-    }
-    .header h1 {
-      font-size: 19px;
+    .logo h1 {
+      font-size: 22px;
+      color: #1a3a6b;
       font-weight: bold;
-      line-height: 1.4;
-      margin-bottom: 8px;
+      letter-spacing: 0.05em;
     }
-    .header .date {
+    .logo p {
       font-size: 13px;
-      opacity: 0.9;
+      color: #666;
+      margin-top: 6px;
+      line-height: 1.6;
     }
     .card {
       background: white;
@@ -49,20 +41,22 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       margin-bottom: 16px;
     }
-    .field-label {
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #1a3a6b;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .form-group { margin-bottom: 4px; }
+    label.field-label {
       display: block;
       font-size: 14px;
       font-weight: bold;
       margin-bottom: 8px;
     }
     .required { color: #e74c3c; margin-left: 4px; }
-    .optional {
-      font-size: 11px;
-      color: #999;
-      font-weight: normal;
-      margin-left: 6px;
-    }
-    input[type="text"], textarea {
+    input[type="text"] {
       width: 100%;
       padding: 12px;
       border: 1.5px solid #ddd;
@@ -70,11 +64,8 @@
       font-size: 15px;
       outline: none;
       transition: border-color 0.2s;
-      font-family: inherit;
     }
-    input[type="text"]:focus,
-    textarea:focus { border-color: #1a3a6b; }
-    textarea { resize: vertical; min-height: 80px; }
+    input[type="text"]:focus { border-color: #1a3a6b; }
     .radio-group {
       display: flex;
       flex-direction: column;
@@ -101,31 +92,20 @@
       flex-shrink: 0;
     }
     .radio-item span { font-size: 14px; line-height: 1.4; }
-    #other-text {
-      margin-top: 10px;
-      display: none;
-    }
     .submit-btn {
       width: 100%;
-      padding: 18px;
+      padding: 16px;
       background: #1a3a6b;
       color: white;
       border: none;
       border-radius: 10px;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
       transition: opacity 0.2s;
     }
     .submit-btn:active { opacity: 0.75; }
     .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
-    .notice {
-      font-size: 12px;
-      color: #888;
-      text-align: center;
-      margin-top: 8px;
-      line-height: 1.6;
-    }
     #loading {
       display: flex;
       justify-content: center;
@@ -139,16 +119,14 @@
       min-height: 100vh;
       justify-content: center;
       align-items: center;
-      padding: 24px;
     }
     .success-card {
       background: white;
       border-radius: 16px;
       padding: 40px 24px;
       text-align: center;
+      margin: 24px 16px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      width: 100%;
-      max-width: 400px;
     }
     .success-card .icon { font-size: 52px; margin-bottom: 16px; }
     .success-card h2 { font-size: 20px; color: #1a3a6b; margin-bottom: 12px; }
@@ -160,136 +138,115 @@
   <div id="loading">読み込み中...</div>
 
   <div id="form-container" class="container" style="display:none;">
-    <div class="header">
-      <div class="label">Active STORY × ひとやね</div>
-      <h1>コーチングセミナー<br>申し込みフォーム</h1>
-      <div class="date">📅 6月24日（水）14:00〜16:00</div>
-      <div class="date">📍 ひとやね（岡山市南区古新田1391-1）</div>
+    <div class="logo">
+      <h1>Active STORY</h1>
+      <p>あなたに合った情報をお届けするために<br>2つだけ教えてください</p>
     </div>
 
-    <div class="card" style="font-size:14px; line-height:1.8; color:#444;">
-      申し込みいただきありがとうございます。<br>
-      以下のアンケートにお答えください。
-    </div>
-
-    <form id="seminar-form">
-
+    <form id="survey-form">
       <div class="card">
-        <label class="field-label">氏名<span class="required">*</span></label>
-        <input type="text" id="name" placeholder="例：山田 太郎" required>
+        <div class="form-group">
+          <label class="field-label">お名前<span class="required">*</span></label>
+          <input type="text" id="name" placeholder="例：山田 太郎" required>
+        </div>
       </div>
 
       <div class="card">
-        <label class="field-label">職種<span class="required">*</span></label>
+        <p class="section-title">Q1. 今のあなたに一番近いのは？<span class="required">*</span></p>
         <div class="radio-group">
           <label class="radio-item">
-            <input type="radio" name="jobType" value="経営・マネジメント" required>
-            <span>経営・マネジメント</span>
+            <input type="radio" name="q1" value="A" required>
+            <span>会社員・教員など。このままでいいか迷っている</span>
           </label>
           <label class="radio-item">
-            <input type="radio" name="jobType" value="営業・顧客対応">
-            <span>営業・顧客対応</span>
+            <input type="radio" name="q1" value="B">
+            <span>独立・起業を考えている</span>
           </label>
           <label class="radio-item">
-            <input type="radio" name="jobType" value="バックオフィス（人事・総務・経理など）">
-            <span>バックオフィス（人事・総務・経理など）</span>
+            <input type="radio" name="q1" value="C">
+            <span>すでに経営者・フリーランス</span>
           </label>
           <label class="radio-item">
-            <input type="radio" name="jobType" value="専門・技術職（エンジニア・クリエイターなど）">
-            <span>専門・技術職（エンジニア・クリエイターなど）</span>
+            <input type="radio" name="q1" value="D">
+            <span>コーチングや自己成長に興味があって来た</span>
           </label>
-          <label class="radio-item">
-            <input type="radio" name="jobType" value="教育・福祉・対人支援">
-            <span>教育・福祉・対人支援</span>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="jobType" value="その他" id="jobType-other">
-            <span>その他</span>
-          </label>
-        </div>
-        <div id="other-text">
-          <input type="text" id="jobTypeOther" placeholder="職種を入力してください">
         </div>
       </div>
 
       <div class="card">
-        <label class="field-label">会社名<span class="required">*</span></label>
-        <input type="text" id="company" placeholder="例：株式会社〇〇" required>
+        <p class="section-title">Q2. 今一番「なんとかしたい」ことは？<span class="required">*</span></p>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="q2" value="1" required>
+            <span>仕事・キャリアのこと</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="q2" value="2">
+            <span>自分の可能性や将来のこと</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="q2" value="3">
+            <span>人との関係・チームのこと</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="q2" value="4">
+            <span>まずコーチングがどんなものか知りたい</span>
+          </label>
+        </div>
       </div>
 
-      <div class="card">
-        <label class="field-label">部署／役職<span class="optional">任意</span></label>
-        <input type="text" id="department" placeholder="例：営業部 マネージャー">
-      </div>
-
-      <div class="card">
-        <label class="field-label">
-          本セミナーで聞いてみたいことや<br>解決したいことは何ですか？
-          <span class="optional">任意</span>
-        </label>
-        <textarea id="question" placeholder="何でも気軽に書いてください"></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submit-btn">申し込む</button>
+      <button type="submit" class="submit-btn" id="submit-btn">送信する</button>
     </form>
   </div>
 
   <div id="success-container">
     <div class="success-card">
-      <div class="icon">🎉</div>
-      <h2>お申し込みありがとうございます！</h2>
-      <p>
-        6月24日のセミナーへの<br>お申し込みを受け付けました。<br><br>
-        詳細は担当者よりLINEにてご連絡します。<br>
-        当日お会いできることを楽しみにしています！
-      </p>
+      <div class="icon">✅</div>
+      <h2>ありがとうございます！</h2>
+      <p>回答を受け付けました。<br>あなたに合った情報をお届けしますね。<br><br>このページは閉じてOKです。</p>
     </div>
   </div>
 
   <script>
-    const LIFF_ID = '2010341329-I89jXj1U';
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbx_UjLeyVD6ZFM0xYFo724tlctb7sWycUeKXfGt73CPFvgKfTeaW9o4PDguCi4yr2XrrA/exec';
+    // ▼ 設定項目（デプロイ後に書き換える）
+    const LIFF_ID  = '2010341329-ZOQ2pI15'; // LINE DevelopersのLIFF ID
+    const GAS_URL  = 'https://script.google.com/macros/s/AKfycbx_UjLeyVD6ZFM0xYFo724tlctb7sWycUeKXfGt73CPFvgKfTeaW9o4PDguCi4yr2XrrA/exec';
 
     let lineUserId = '';
     let lineDisplayName = '';
 
-    // 「その他」選択時にテキスト欄を表示
-    document.querySelectorAll('input[name="jobType"]').forEach(radio => {
-      radio.addEventListener('change', () => {
-        const otherBox = document.getElementById('other-text');
-        otherBox.style.display = radio.value === 'その他' ? 'block' : 'none';
-      });
-    });
-
     async function initLiff() {
       try {
         await liff.init({ liffId: LIFF_ID });
-        if (!liff.isLoggedIn()) { liff.login(); return; }
+
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+
         const profile = await liff.getProfile();
-        lineUserId     = profile.userId;
-        lineDisplayName = profile.displayName;
+        lineUserId       = profile.userId;
+        lineDisplayName  = profile.displayName;
+
         document.getElementById('loading').style.display = 'none';
         document.getElementById('form-container').style.display = 'block';
+
       } catch (err) {
         document.getElementById('loading').textContent =
-          'エラーが発生しました。再読み込みしてください。';
+          'エラーが発生しました。ページを再読み込みしてください。';
+        console.error(err);
       }
     }
 
-    document.getElementById('seminar-form').addEventListener('submit', async (e) => {
+    document.getElementById('survey-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const name       = document.getElementById('name').value.trim();
-      const jobTypeEl  = document.querySelector('input[name="jobType"]:checked');
-      const jobType    = jobTypeEl?.value === 'その他'
-                         ? document.getElementById('jobTypeOther').value.trim() || 'その他'
-                         : jobTypeEl?.value || '';
-      const company    = document.getElementById('company').value.trim();
-      const department = document.getElementById('department').value.trim();
-      const question   = document.getElementById('question').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const q1   = document.querySelector('input[name="q1"]:checked')?.value;
+      const q2   = document.querySelector('input[name="q2"]:checked')?.value;
 
-      if (!name || !jobTypeEl || !company) {
-        alert('氏名・職種・会社名は必須です。');
+      if (!name || !q1 || !q2) {
+        alert('すべての項目を入力してください。');
         return;
       }
 
@@ -298,25 +255,28 @@
       btn.textContent = '送信中...';
 
       const payload = {
-        type: 'seminar',
         lineUserId,
         lineDisplayName,
         name,
-        jobType,
-        company,
-        department,
-        question,
+        q1,
+        q2,
         submittedAt: new Date().toISOString()
       };
 
       try {
-        await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
+        await fetch(GAS_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('success-container').style.display = 'flex';
+
       } catch (err) {
         alert('送信に失敗しました。もう一度お試しください。');
         btn.disabled    = false;
-        btn.textContent = '申し込む';
+        btn.textContent = '送信する';
+        console.error(err);
       }
     });
 
